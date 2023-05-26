@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Продавцы:</h2>
+{% for seller in Sellers %}
+<h4>{{seller.name}}</h4>
+<a class="btn btn-primary" href="{% url 'deleteSeller' seller.id %}">Удалить</a></td>
+<a class="btn btn-primary" href="{% url 'updateSellerPage' seller.id %}">Изменить</a></td>
+{% endfor %}
+<form action="{% url 'createSeller' %}" method="POST" enctype="multipart/form-data">
+        <input style="width:20%"  type="text" class="form-control" name="sellerName" placeholder="Имя продавца"><br>
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Добавить">
+    </form>
+</body>
+</html>
