@@ -97,4 +97,4 @@ newRow = [newFood.number, newFood.name, newFood.quantity, newFood.servTime, newF
 data.loc[len(data)] = newRow
 print(data)
 data.to_csv("data.csv", index=False)  # Добавление строки в csv файл
-print("thirdBranch")
+print("clone")
