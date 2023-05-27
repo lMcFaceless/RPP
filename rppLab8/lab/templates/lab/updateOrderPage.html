@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'updateOrder' Order.id %}" method="POST" enctype="multipart/form-data">
+        <input list="cl" placeholder="клиент" name="orderClientTitle" />
+        <datalist id="cl">
+          {% for client in Clients %}
+          <option value={{client.name}}>
+          {% endfor %}
+        </datalist>
+
+        <input list="sel" placeholder="продавец" name="orderSellerDishTitle" />
+        <datalist id="sel">
+          {% for seller in Sellers %}
+          <option value={{seller.name}}>
+          {% endfor %}
+        </datalist>
+
+        <input list="di" placeholder="блюдо" name="orderDishTitle" />
+        <datalist id="di">
+          {% for dish in Dishes %}
+          <option value={{dish.title}}>
+          {% endfor %}
+        </datalist>
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Изменить">
+    </form>
+</body>
+</body>
+</html>

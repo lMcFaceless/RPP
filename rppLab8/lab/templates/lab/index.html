@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Продавцы:</h2>
+{% for seller in Sellers %}
+<h4>{{seller.name}}</h4>
+<a class="btn btn-primary" href="{% url 'deleteSeller' seller.id %}">Удалить</a></td>
+<a class="btn btn-primary" href="{% url 'updateSellerPage' seller.id %}">Изменить</a></td>
+{% endfor %}
+<form action="{% url 'createSeller' %}" method="POST" enctype="multipart/form-data">
+        <input style="width:20%"  type="text" class="form-control" name="sellerName" placeholder="Имя продавца"><br>
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Добавить">
+    </form>
+
+<h2>Клиенты:</h2>
+
+{% for client in Clients %}
+<h4>{{client.name}}</h4>
+<a class="btn btn-primary" href="{% url 'deleteClient' client.id %}">Удалить</a></td>
+<a class="btn btn-primary" href="{% url 'updateClientPage' client.id %}">Изменить</a></td>
+{% endfor %}
+
+<form action="{% url 'createClient' %}" method="POST" enctype="multipart/form-data">
+        <input style="width:20%"  type="text" class="form-control" name="clientName" placeholder="Имя клиента"><br>
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Добавить">
+    </form>
+
+
+<h2>Блюда:</h2>
+
+{% for dish in Dishes %}
+<h4>{{dish.title}}</h4>
+<a class="btn btn-primary" href="{% url 'deleteDish' dish.id %}">Удалить</a></td>
+<a class="btn btn-primary" href="{% url 'updateDishPage' dish.id %}">Изменить</a></td>
+{% endfor %}
+
+<form action="{% url 'createDish' %}" method="POST" enctype="multipart/form-data">
+        <input style="width:20%"  type="text" class="form-control" name="dishName" placeholder="название блюда"><br>
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Добавить">
+    </form>
+
+<h2>Продукты:</h2>
+
+{% for product in Products %}
+<h4>{{product.name}}</h4>
+<a class="btn btn-primary" href="{% url 'deleteProduct' product.id %}">Удалить</a></td>
+<a class="btn btn-primary" href="{% url 'updateProductPage' product.id %}">Изменить</a></td>
+{% endfor %}
+
+<form action="{% url 'createProduct' %}" method="POST" enctype="multipart/form-data">
+        <input style="width:20%"  type="text" class="form-control" name="productName" placeholder="название продукта"><br>
+        <input list="p" placeholder="блюдо" name="productDishTitle" />
+        <datalist id="p">
+          {% for dish in Dishes %}
+          <option value={{dish.title}}>
+          {% endfor %}
+        </datalist>
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Добавить">
+    </form>
+
+<h2>Заказы:</h2>
+
+{% for order in Orders %}
+<h4>{{order.number}}</h4>
+<a class="btn btn-primary" href="{% url 'deleteOrder' order.id %}">Удалить</a></td>
+<a class="btn btn-primary" href="{% url 'updateOrderPage' order.id %}">Изменить</a></td>
+{% endfor %}
+
+<form action="{% url 'createOrder' %}" method="POST" enctype="multipart/form-data">
+        <input list="cl" placeholder="клиент" name="orderClientTitle" />
+        <datalist id="cl">
+          {% for client in Clients %}
+          <option value={{client.name}}>
+          {% endfor %}
+        </datalist>
+
+        <input list="sel" placeholder="продавец" name="orderSellerDishTitle" />
+        <datalist id="sel">
+          {% for seller in Sellers %}
+          <option value={{seller.name}}>
+          {% endfor %}
+        </datalist>
+
+        <input list="di" placeholder="блюдо" name="orderDishTitle" />
+        <datalist id="di">
+          {% for dish in Dishes %}
+          <option value={{dish.title}}>
+          {% endfor %}
+        </datalist>
+
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Добавить">
+    </form>
+
+</body>
+</html>
